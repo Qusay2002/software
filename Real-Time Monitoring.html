@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Monitoring</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .map-container {
+      height: 300px;
+      background-color: #ddd;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .map-marker {
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+    .device-status {
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    .device-status h5 {
+      margin-bottom: 10px;
+    }
+    .status-online {
+      color: green;
+    }
+    .status-offline {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <section id="Real-Time-Monitoring" class="header_section">
+      <h1 style="color: #08135c;">Real-Time Monitoring</h1>
+
+      <!-- Interactive Map -->
+      <div class="map-container">
+        <div class="map-marker" style="top: 40%; left: 30%;"></div>
+        <div class="map-marker" style="top: 60%; left: 70%;"></div>
+        <!-- Add more markers as needed -->
+      </div>
+
+      <!-- Graphs -->
+      <div class="row">
+        <div class="col-md-6">
+          <canvas id="energyUsageGraph"></canvas>
+        </div>
+        <div class="col-md-6">
+          <canvas id="waterConsumptionGraph"></canvas>
+        </div>
+      </div>
+
+      <!-- Device Status -->
+      <div class="device-status">
+        <h5>Device Status</h5>
+        <p>HVAC System: <span class="status-online">Online</span></p>
+        <p>Lighting System: <span class="status-offline">Offline</span></p>
+        <p>Water Pump: <span class="status-online">Online</span></p>
+        <!-- Add more device statuses as needed -->
+      </div>
+
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Energy Usage Graph
+    const ctxEnergy = document.getElementById('energyUsageGraph').getContext('2d');
+    const energyUsageGraph = new Chart(ctxEnergy, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Energy Usage (kWh)',
+          data: [1200, 1500, 1400, 1600, 1700, 1800],
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            beginAtZero: true
+          },
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Water Consumption Graph
+    const ctxWater = document.getElementById('waterConsumptionGraph').getContext('2d');
+    const waterConsumptionGraph = new Chart(ctxWater, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Water Consumption (Liters)',
+          data: [3000, 2800, 3200, 3100, 3300, 3400],
+          backgroundColor: 'rgba(54, 162, 235, 0.6)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            beginAtZero: true
+          },
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
